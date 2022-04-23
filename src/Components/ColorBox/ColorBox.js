@@ -20,19 +20,17 @@ class ColorBox extends Component {
 
     render() {
         const isActive = this.state.isCopied ? 'active' : 'hidden';
+        const { hex: color } = this.props;
         return (
-            <CopyToClipboard text={this.props.color} onCopy={this.handleCopy}>
-                <div
-                    style={{ backgroundColor: this.props.color }}
-                    className='ColorBox'
-                >
+            <CopyToClipboard text={color} onCopy={this.handleCopy}>
+                <div style={{ backgroundColor: color }} className='ColorBox'>
                     <div
                         className={`ColorBox__overlay ${isActive}`}
-                        style={{ backgroundColor: this.props.color }}
+                        style={{ backgroundColor: color }}
                     ></div>
                     <div className={`Overlay__text ${isActive}`}>
                         <h2 className='Overlay__title'>copied!</h2>
-                        <h4 className='Overlay__color'>{this.props.color}</h4>
+                        <h4 className='Overlay__color'>{color}</h4>
                     </div>
                     <div className='ColorBox__CpyBtn'>copy</div>
                     <div className='btnContainer'>
