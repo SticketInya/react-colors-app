@@ -9,30 +9,89 @@
     cursor: pointer;
 }
 
-.ColorBox__copy{
-    margin: 40%;
+.ColorBox__overlay{
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition-delay: 100ms;
+    transition: transform 500ms ease-in-out;
+    transform: scale(0.1);
+
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.ColorBox__overlay.active{
+    opacity: 1;
+    z-index: 10;
+    transform: scale(10);
+}
+
+.Overlay__text{
+    position: fixed;
+    inset: 50%;
+    z-index: -1;
+    opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    transform: scale(0.1);
+}
+
+.Overlay__text.active{
+    opacity: 1;
+    z-index: 25;
+    transform: scale(1);
+    transition: all 200ms ease-out 600ms;
+}
+
+.Overlay__text h2{
+    font-size: 5rem;
+    color: white;
+    text-shadow: 1px 2px rgb(0, 0, 0);
+}
+
+.Overlay__text h4{
+    font-size: 2rem;
+    color: white;
+    font-weight: 300;
+}
+
+
+.ColorBox__CpyBtn{
+    position: absolute;
     width: fit-content;
     padding: 0.5em 1em;
-    margin-left: auto;
-    margin-right: auto;
+    top: 45%;
+    left: 40%;
 
     background-color: rgba(255,255,255,0.4);
     color: white;
     opacity: 0;
 }
 
-.ColorBox:hover .ColorBox__copy{
+.ColorBox:hover .ColorBox__CpyBtn{
     opacity: 1;
     transition: 200ms ease-out;
 }
+
 
 .btnContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto;
-    margin-bottom: 0;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
 }
 
 .btnContainer__color{

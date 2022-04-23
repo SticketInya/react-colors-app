@@ -5,17 +5,36 @@ import './ColorBox.css';
 class ColorBox extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isCopied: false,
+        };
     }
 
+    handleCopy = () => {
+        this.setState({ isCopied: true }, () => {
+            setTimeout(() => {
+                this.setState({ isCopied: false });
+            }, 1500);
+        });
+    };
+
     render() {
+        const isActive = this.state.isCopied ? 'active' : 'hidden';
         return (
-            <CopyToClipboard text={this.props.color}>
+            <CopyToClipboard text={this.props.color} onCopy={this.handleCopy}>
                 <div
                     style={{ backgroundColor: this.props.color }}
                     className='ColorBox'
                 >
-                    <div className='ColorBox__copy'>copy</div>
+                    <div
+                        className={`ColorBox__overlay ${isActive}`}
+                        style={{ backgroundColor: this.props.color }}
+                    ></div>
+                    <div className={`Overlay__text ${isActive}`}>
+                        <h2 className='Overlay__title'>copied!</h2>
+                        <h4 className='Overlay__color'>{this.props.color}</h4>
+                    </div>
+                    <div className='ColorBox__CpyBtn'>copy</div>
                     <div className='btnContainer'>
                         <span className='btnContainer__color'>
                             {this.props.name}
