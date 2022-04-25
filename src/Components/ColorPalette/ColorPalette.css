@@ -3,23 +3,6 @@
     overflow: hidden;
 }
 
-.ColorPalette__navbar{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 2rem;
-}
-
-.ColorPalette__slider{
-    width: 20rem;
-    display: inline-block;
-}
-
-.ColorPalette__slider .rc-slider-track{
-    background-color: transparent;
-}
-
 .ColorPalette__colors{
     height: 90%;
     display: flex;

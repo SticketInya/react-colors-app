@@ -1,0 +1,46 @@
+.Navbar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 2rem;
+    height: 6vh;
+}
+
+.Navbar__title{
+    height: 100%;
+    background-color: rgb(212, 212, 212);
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.Navbar__title a{
+    color: black;
+    font-size: 2rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.Navbar__slider{
+    width: 20rem;
+    display: inline-block;
+}
+
+.Navbar__slider .rc-slider-track{
+    background-color: transparent;
+}
+
+.Slider-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.Slider-level{
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}

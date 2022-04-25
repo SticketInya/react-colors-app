@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import ColorBox from '../ColorBox/ColorBox';
+import Navbar from '../Navbar/Navbar';
+
 import './ColorPalette.css';
 
 class ColorPalette extends Component {
@@ -24,20 +24,11 @@ class ColorPalette extends Component {
         ));
         return (
             <div className='ColorPalette'>
-                <div className='ColorPalette__navbar'>
-                    <h1 className='ColorPalette__title'>
-                        {this.props.palette.paletteName}
-                    </h1>
-                    <Slider
-                        className='ColorPalette__slider'
-                        defaultValue={this.state.colorLevel}
-                        min={100}
-                        max={900}
-                        step={100}
-                        onChange={this.handleSliderChange}
-                    />
-                </div>
-
+                <Navbar
+                    paletteName={this.props.palette.paletteName}
+                    colorLevel={colorLevel}
+                    handleSliderChange={this.handleSliderChange}
+                />
                 <div className='ColorPalette__colors'>{colorBoxes}</div>
             </div>
         );
