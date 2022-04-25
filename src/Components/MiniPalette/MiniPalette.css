@@ -1,0 +1,64 @@
+.MiniPalette{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0;
+    box-shadow: 15px 15px 20px #001b7277;
+    cursor: pointer;
+
+    transition: all 200ms ease-out;
+}
+
+.MiniPalette:hover{
+    transform: scale(1.05);
+    box-shadow: 20px 20px 30px #001b7262;
+}
+
+.MiniPalette__link, .MiniPalette__link:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.MiniPalette__container{
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+}
+
+.MiniPalette__title{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    margin:0;
+}
+
+.MiniPalette__title span{
+    font-size: 1.5rem;
+}
+
+.MiniPalette__colors{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 150px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: grey;
+}
+
+.MiniPalette__colors .miniColor{
+    width: 20%;
+    height: 25%;
+    display: inline-block;
+    position: relative;
+}
