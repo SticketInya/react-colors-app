@@ -28,7 +28,7 @@ class Navbar extends Component {
     };
 
     render() {
-        const { paletteName, colorLevel, handleSliderChange } = this.props;
+        const { colorLevel, handleSliderChange } = this.props;
         const closeButton = (
             <>
                 <IconButton
@@ -44,7 +44,7 @@ class Navbar extends Component {
         return (
             <nav className='Navbar'>
                 <div className='Navbar__title'>
-                    <Link to='/'>{paletteName}</Link>
+                    <Link to='/'>Flatter UI Colors</Link>
                 </div>
                 <div className='Slider-container'>
                     <p className='Slider-level'>level: {colorLevel}</p>
