@@ -20,7 +20,7 @@ class ColorBox extends Component {
 
     render() {
         const isActive = this.state.isCopied ? 'active' : 'hidden';
-        const { hex: color } = this.props;
+        const { [this.props.format]: color } = this.props;
         return (
             <CopyToClipboard text={color} onCopy={this.handleCopy}>
                 <div style={{ backgroundColor: color }} className='ColorBox'>

@@ -9,6 +9,7 @@ class ColorPalette extends Component {
         super(props);
         this.state = {
             colorLevel: 500,
+            colorFormat: 'hex',
         };
     }
 
@@ -16,11 +17,15 @@ class ColorPalette extends Component {
         this.setState({ colorLevel: newLevel });
     };
 
+    handleFormatChange = (newFormat) => {
+        this.setState({ colorFormat: newFormat });
+    };
+
     render() {
         const { colors } = this.props.palette;
-        const { colorLevel } = this.state;
+        const { colorLevel, colorFormat } = this.state;
         const colorBoxes = colors[colorLevel].map((color) => (
-            <ColorBox {...color} key={color.id} />
+            <ColorBox {...color} key={color.id} format={colorFormat} />
         ));
         return (
             <div className='ColorPalette'>
@@ -28,6 +33,7 @@ class ColorPalette extends Component {
                     paletteName={this.props.palette.paletteName}
                     colorLevel={colorLevel}
                     handleSliderChange={this.handleSliderChange}
+                    changeFormat={this.handleFormatChange}
                 />
                 <div className='ColorPalette__colors'>{colorBoxes}</div>
             </div>
