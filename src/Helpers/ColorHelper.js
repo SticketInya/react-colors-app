@@ -11,6 +11,9 @@ export default function generatePalette(starterPalette) {
     starterPalette.colors.forEach((color) => {
         const scale = getScale(color.color, levels.length);
         scale.forEach((hex, i) => {
+            if (levels[i] === 50) {
+                return;
+            }
             newColors[levels[i]].push({
                 id: color.name.toLowerCase().replace(/ /g, '-'),
                 name: `${color.name} ${levels[i]}`,
