@@ -31,7 +31,6 @@ class ColorPalette extends Component {
         return (
             <div className='ColorPalette'>
                 <Navbar
-                    paletteName={paletteName}
                     colorLevel={colorLevel}
                     handleSliderChange={this.handleSliderChange}
                     changeFormat={this.handleFormatChange}
