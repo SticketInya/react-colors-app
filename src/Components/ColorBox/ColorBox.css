@@ -100,6 +100,7 @@
 }
 
 .btnContainer__more{
+    text-decoration: none;
     border: 0px;
     padding: 0.5em;
     cursor: pointer;

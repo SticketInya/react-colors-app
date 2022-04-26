@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 import './ColorBox.css';
 
 class ColorBox extends Component {
+    static defaultProps = {
+        showLink: true,
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +41,15 @@ class ColorBox extends Component {
                         <span className='btnContainer__color'>
                             {this.props.name}
                         </span>
-                        <button className='btnContainer__more'>more</button>
+                        {this.props.showLink && (
+                            <Link
+                                to={`${this.props.id}`}
+                                className='btnContainer__more'
+                                onClick={(e) => e.stopPropagation}
+                            >
+                                more
+                            </Link>
+                        )}
                     </div>
                 </div>
             </CopyToClipboard>

@@ -1,13 +1,19 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ColorPalette from '../Components/ColorPalette/ColorPalette';
 import generatePalette from './ColorHelper';
 
-function FindPalette({ colorPalettes }) {
+function FindPalette({ children, colorPalettes }) {
     const { id } = useParams();
     const correctPalette = colorPalettes.find((palette) => palette.id === id);
+    const generatedPalette = generatePalette(correctPalette);
 
-    return <ColorPalette palette={generatePalette(correctPalette)} />;
+    return (
+        <>
+            {React.cloneElement(children, {
+                palette: generatedPalette,
+            })}
+        </>
+    );
 }
 
 export default FindPalette;

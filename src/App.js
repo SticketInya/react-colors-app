@@ -4,6 +4,7 @@ import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import DefaultColors from './Components/DefaultColors';
 import FindPalette from './Helpers/FindPalette';
 import PaletteList from './Components/PaletteList/PaletteList';
+import ColorPalette from './Components/ColorPalette/ColorPalette';
 import SingleColorPalette from './Components/SingleColorPalette/SingleColorPalette';
 
 function App() {
@@ -16,11 +17,19 @@ function App() {
                 />
                 <Route
                     path={'palette/:id'}
-                    element={<FindPalette colorPalettes={DefaultColors} />}
+                    element={
+                        <FindPalette colorPalettes={DefaultColors}>
+                            <ColorPalette />
+                        </FindPalette>
+                    }
                 />
                 <Route
-                    path={'palette/:paletteId/:colorId'}
-                    element={<SingleColorPalette />}
+                    path={'palette/:id/:colorId'}
+                    element={
+                        <FindPalette colorPalettes={DefaultColors}>
+                            <SingleColorPalette />
+                        </FindPalette>
+                    }
                 />
                 <Route path={'*'} element={<Navigate to='/' replace />} />
             </Routes>
