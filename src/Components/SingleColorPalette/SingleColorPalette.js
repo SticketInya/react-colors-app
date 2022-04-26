@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ColorBox from '../ColorBox/ColorBox';
+import Navbar from '../Navbar/Navbar';
+import PaletteFooter from '../PaletteFooter/PaletteFooter';
+import { Link } from 'react-router-dom';
 
 import './SingleColorPalette.css';
 
-function SingleColorPalette({ palette: { colors } }) {
+function SingleColorPalette({
+    palette: { colors, paletteName, emoji, id: paletteId },
+}) {
     const [colorFormat, setColorFormat] = useState('hex');
     const { colorId } = useParams();
 
@@ -16,8 +21,11 @@ function SingleColorPalette({ palette: { colors } }) {
         return shades;
     };
 
+    const handleFormatChange = (newFormat) => {
+        setColorFormat(newFormat);
+    };
+
     const shades = getShades(colors, colorId);
-    console.log(shades);
     const colorBoxes = shades.map((shade) => {
         return (
             <ColorBox
@@ -31,10 +39,19 @@ function SingleColorPalette({ palette: { colors } }) {
 
     return (
         <div className='SingleColorPalette'>
-            <h1 className='SingleColorPalette__title'>
-                Single Color Page: {colorId}
-            </h1>
-            <div className='SingleColorPalette__colors'>{colorBoxes}</div>
+            <Navbar changeFormat={handleFormatChange} />
+            <div className='SingleColorPalette__colors'>
+                {colorBoxes}
+                <div style={{ backgroundColor: 'black', position: 'relative' }}>
+                    <Link
+                        to={`../palette/${paletteId}`}
+                        className='SingleColorPalette__back'
+                    >
+                        go back
+                    </Link>
+                </div>
+            </div>
+            <PaletteFooter paletteName={paletteName} emoji={emoji} />
         </div>
     );
 }
