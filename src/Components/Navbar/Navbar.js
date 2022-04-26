@@ -8,6 +8,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 class Navbar extends Component {
+    static defaultProps = {
+        showSlider: false,
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -46,17 +49,19 @@ class Navbar extends Component {
                 <div className='Navbar__title'>
                     <Link to='/'>Flatter UI Colors</Link>
                 </div>
-                <div className='Slider-container'>
-                    <p className='Slider-level'>level: {colorLevel}</p>
-                    <Slider
-                        className='Navbar__slider'
-                        defaultValue={colorLevel}
-                        min={100}
-                        max={900}
-                        step={100}
-                        onChange={handleSliderChange}
-                    />
-                </div>
+                {this.props.showSlider && (
+                    <div className='Slider-container'>
+                        <p className='Slider-level'>level: {colorLevel}</p>
+                        <Slider
+                            className='Navbar__slider'
+                            defaultValue={colorLevel}
+                            min={100}
+                            max={900}
+                            step={100}
+                            onChange={handleSliderChange}
+                        />
+                    </div>
+                )}
                 <div className='Select_container'>
                     <Select defaultValue={'hex'} onChange={this.handleChange}>
                         <MenuItem value='hex'>HEX</MenuItem>

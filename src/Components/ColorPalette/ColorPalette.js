@@ -35,6 +35,7 @@ class ColorPalette extends Component {
                     colorLevel={colorLevel}
                     handleSliderChange={this.handleSliderChange}
                     changeFormat={this.handleFormatChange}
+                    showSlider={true}
                 />
                 <div className='ColorPalette__colors'>{colorBoxes}</div>
                 <PaletteFooter paletteName={paletteName} emoji={emoji} />
