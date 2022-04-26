@@ -5,6 +5,9 @@ export default function generatePalette(starterPalette) {
     let newColors = {};
 
     levels.forEach((level) => {
+        if (level === 50) {
+            return;
+        }
         newColors[level] = [];
     });
 
