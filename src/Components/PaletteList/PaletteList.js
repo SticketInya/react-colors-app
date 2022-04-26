@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MiniPalette from '../MiniPalette/MiniPalette';
+import { Outlet } from 'react-router-dom';
 
 import './PaletteList.css';
 
