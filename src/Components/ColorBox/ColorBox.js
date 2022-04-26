@@ -5,6 +5,8 @@ import chroma from 'chroma-js';
 
 import './ColorBox.css';
 
+const WCAG_CONTRAST_RATIO = 4.5;
+
 class ColorBox extends Component {
     static defaultProps = {
         showLink: true,
@@ -27,8 +29,10 @@ class ColorBox extends Component {
     render() {
         const isActive = this.state.isCopied ? 'active' : 'hidden';
         const { [this.props.format]: color } = this.props;
-        const isDarkBgColor = chroma.contrast(color, 'black') < 4.5;
-        const isLightBgColor = chroma.contrast(color, 'white') < 4.5;
+        const isDarkBgColor =
+            chroma.contrast(color, 'black') < WCAG_CONTRAST_RATIO;
+        const isLightBgColor =
+            chroma.contrast(color, 'white') < WCAG_CONTRAST_RATIO;
         const darkTextStyle = isDarkBgColor
             ? { color: 'white' }
             : { color: 'black' };
