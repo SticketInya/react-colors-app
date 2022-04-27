@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { arrayMove } from 'react-sortable-hoc';
+import { useNavigate } from 'react-router-dom';
 
 //MUI
 import { styled } from '@mui/material/styles';
@@ -18,9 +19,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 
 //Own
-import './CreatePalette.css';
-import { useNavigate } from 'react-router-dom';
 import DndColorBoxList from '../DndColorBoxList/DndColorBoxList';
+import CreatePaletteNav from '../CreatePaletteNav/CreatePaletteNav';
+
+import './CreatePalette.css';
 
 const drawerWidth = 400;
 
@@ -81,7 +83,6 @@ export default function CreatePalette({
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = React.useState('blue');
     const [newColorName, setNewColorName] = React.useState('');
-    const [newPaletteName, setNewPaletteName] = React.useState('');
     const [allColors, setAllColors] = React.useState(defaultColors);
     const usedPaletteNames = getNames();
     const isPaletteFull = allColors.length >= maxColors;
@@ -108,10 +109,6 @@ export default function CreatePalette({
         setNewColorName(e.target.value);
     };
 
-    const handlePaletteNameChange = (e) => {
-        setNewPaletteName(e.target.value);
-    };
-
     const handleGetRandomColor = () => {
         let randomColor = getRandomColor();
         //TODO - Fix Duplicate Colors
@@ -122,7 +119,7 @@ export default function CreatePalette({
         setAllColors((prevColors) => [...prevColors, randomColor]);
     };
 
-    const handlePaletteSave = () => {
+    const handlePaletteSave = (newPaletteName) => {
         const newPalette = {
             paletteName: newPaletteName,
             id: newPaletteName.toLowerCase().replace(/ /g, '-'),
@@ -172,15 +169,6 @@ export default function CreatePalette({
             });
         }
 
-        if (!ValidatorForm.hasValidationRule('isPaletteNameUnique')) {
-            ValidatorForm.addValidationRule('isPaletteNameUnique', (_value) => {
-                return usedPaletteNames.every(
-                    (name) =>
-                        name.toLowerCase() !== newPaletteName.toLowerCase(),
-                );
-            });
-        }
-
         return function cleanCustomRules() {
             if (ValidatorForm.hasValidationRule('isColorNameUnique')) {
                 ValidatorForm.removeValidationRule('isColorNameUnique');
@@ -188,57 +176,19 @@ export default function CreatePalette({
             if (ValidatorForm.hasValidationRule('isColorUnique')) {
                 ValidatorForm.removeValidationRule('isColorUnique');
             }
-            if (ValidatorForm.hasValidationRule('isPaletteNameUnique')) {
-                ValidatorForm.removeValidationRule('isPaletteNameUnique');
-            }
         };
     });
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <AppBar position='fixed' open={open}>
-                <Toolbar>
-                    <IconButton
-                        color='inherit'
-                        aria-label='open drawer'
-                        onClick={handleDrawerOpen}
-                        edge='start'
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant='h6' noWrap component='div'>
-                        Persistent drawer
-                    </Typography>
-                    <ValidatorForm
-                        onSubmit={handlePaletteSave}
-                        className='save-form'
-                    >
-                        <TextValidator
-                            name='newPaletteName'
-                            value={newPaletteName}
-                            onChange={handlePaletteNameChange}
-                            validators={['required', 'isPaletteNameUnique']}
-                            errorMessages={[
-                                'this field is required',
-                                'Palette name must be unique',
-                            ]}
-                        />
-                        <Button variant='contained' type='submit'>
-                            Save
-                        </Button>
-                    </ValidatorForm>
-
-                    <Button
-                        variant='outlined'
-                        onClick={handleBack}
-                        style={{ backgroundColor: 'white' }}
-                    >
-                        Back
-                    </Button>
-                </Toolbar>
-            </AppBar>
+            <CreatePaletteNav
+                AppBar={AppBar}
+                open={open}
+                handleDrawerOpen={handleDrawerOpen}
+                handleBack={handleBack}
+                usedPaletteNames={usedPaletteNames}
+                paletteSave={handlePaletteSave}
+            />
             <Drawer
                 sx={{
                     width: drawerWidth,
