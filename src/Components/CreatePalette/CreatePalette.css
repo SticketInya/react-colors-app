@@ -2,13 +2,6 @@
 
 }
 
-.CreatePalette__colors{
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
 .save-form{
     display: flex;
     flex-direction: row;

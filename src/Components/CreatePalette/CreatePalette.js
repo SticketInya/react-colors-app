@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { arrayMove } from 'react-sortable-hoc';
 
 //MUI
 import { styled } from '@mui/material/styles';
@@ -20,6 +21,7 @@ import { Button } from '@mui/material';
 import DraggableColorBox from '../DraggableColorBox/DraggableColorBox';
 import './CreatePalette.css';
 import { useNavigate } from 'react-router-dom';
+import DndColorBoxList from '../DndColorBoxList/DndColorBoxList';
 
 const drawerWidth = 400;
 
@@ -130,6 +132,10 @@ export default function CreatePalette({ savePalette, getNames }) {
         setAllColors((prevColors) =>
             prevColors.filter((color) => color.name !== name),
         );
+    };
+
+    const handleSortEnd = ({ oldIndex, newIndex }) => {
+        setAllColors((prevColors) => arrayMove(prevColors, oldIndex, newIndex));
     };
 
     React.useEffect(() => {
@@ -271,16 +277,12 @@ export default function CreatePalette({ savePalette, getNames }) {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <div className='CreatePalette__colors'>
-                    {allColors.map((color) => (
-                        <DraggableColorBox
-                            color={color.color}
-                            name={color.name}
-                            key={color.name}
-                            deleteColor={deleteColor}
-                        />
-                    ))}
-                </div>
+                <DndColorBoxList
+                    allColors={allColors}
+                    deleteColor={deleteColor}
+                    axis='xy'
+                    onSortEnd={handleSortEnd}
+                />
             </Main>
         </Box>
     );
