@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MiniPalette from '../MiniPalette/MiniPalette';
-import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './PaletteList.css';
 
@@ -19,7 +19,9 @@ class PaletteList extends Component {
                         <h1 className='PaletteList__title'>
                             Flatter UI Colors
                         </h1>
-                        <span>Create Palette</span>
+                        <Link to='palette/new' className='PaletteList__new'>
+                            Create Palette
+                        </Link>
                     </nav>
                     <div className='PaletteList__miniPalettes'>
                         {palettes.map((palette) => (

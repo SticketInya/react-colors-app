@@ -1,11 +1,12 @@
 import './App.css';
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import DefaultColors from './Components/DefaultColors';
 import FindPalette from './Helpers/FindPalette';
 import PaletteList from './Components/PaletteList/PaletteList';
 import ColorPalette from './Components/ColorPalette/ColorPalette';
 import SingleColorPalette from './Components/SingleColorPalette/SingleColorPalette';
+import CreatePalette from './Components/CreatePalette/CreatePalette';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     path={'/'}
                     element={<PaletteList palettes={DefaultColors} />}
                 />
+                <Route path={'palette/new'} element={<CreatePalette />} />
                 <Route
                     path={'palette/:id'}
                     element={
