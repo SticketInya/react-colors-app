@@ -69,15 +69,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function CreatePalette({ savePalette }) {
+export default function CreatePalette({ savePalette, getNames }) {
     const [open, setOpen] = React.useState(true);
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = React.useState('blue');
     const [newColorName, setNewColorName] = React.useState('');
+    const [newPaletteName, setNewPaletteName] = React.useState('');
     const [allColors, setAllColors] = React.useState([
         { name: 'red', color: 'red' },
         { name: 'purple', color: 'purple' },
     ]);
+    const usedPaletteNames = getNames();
 
     const navigate = useNavigate();
 
@@ -101,11 +103,14 @@ export default function CreatePalette({ savePalette }) {
         setNewColorName(e.target.value);
     };
 
+    const handlePaletteNameChange = (e) => {
+        setNewPaletteName(e.target.value);
+    };
+
     const handlePaletteSave = () => {
-        const pName = 'Test Color Palette';
         const newPalette = {
-            paletteName: pName,
-            id: pName.toLowerCase().replace(/ /g, '-'),
+            paletteName: newPaletteName,
+            id: newPaletteName.toLowerCase().replace(/ /g, '-'),
             emoji: ':)',
             colors: allColors,
         };
@@ -137,12 +142,24 @@ export default function CreatePalette({ savePalette }) {
             });
         }
 
+        if (!ValidatorForm.hasValidationRule('isPaletteNameUnique')) {
+            ValidatorForm.addValidationRule('isPaletteNameUnique', (_value) => {
+                return usedPaletteNames.every(
+                    (name) =>
+                        name.toLowerCase() !== newPaletteName.toLowerCase(),
+                );
+            });
+        }
+
         return function cleanCustomRules() {
             if (ValidatorForm.hasValidationRule('isColorNameUnique')) {
                 ValidatorForm.removeValidationRule('isColorNameUnique');
             }
             if (ValidatorForm.hasValidationRule('isColorUnique')) {
                 ValidatorForm.removeValidationRule('isColorUnique');
+            }
+            if (ValidatorForm.hasValidationRule('isPaletteNameUnique')) {
+                ValidatorForm.removeValidationRule('isPaletteNameUnique');
             }
         };
     });
@@ -164,9 +181,22 @@ export default function CreatePalette({ savePalette }) {
                     <Typography variant='h6' noWrap component='div'>
                         Persistent drawer
                     </Typography>
-                    <Button variant='contained' onClick={handlePaletteSave}>
-                        Save
-                    </Button>
+                    <ValidatorForm onSubmit={handlePaletteSave}>
+                        <TextValidator
+                            name='newPaletteName'
+                            value={newPaletteName}
+                            onChange={handlePaletteNameChange}
+                            validators={['required', 'isPaletteNameUnique']}
+                            errorMessages={[
+                                'this field is required',
+                                'Palette name must be unique',
+                            ]}
+                        />
+                        <Button variant='contained' type='submit'>
+                            Save
+                        </Button>
+                    </ValidatorForm>
+
                     <Button
                         variant='outlined'
                         onClick={handleBack}

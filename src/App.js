@@ -16,6 +16,10 @@ function App() {
         setAllPalettes((prevState) => [...prevState, newPalette]);
     };
 
+    const getPaletteNames = () => {
+        return allPalettes.map((palette) => palette.paletteName);
+    };
+
     return (
         <div className='App'>
             <Routes>
@@ -25,7 +29,12 @@ function App() {
                 />
                 <Route
                     path={'palette/new'}
-                    element={<CreatePalette savePalette={savePalette} />}
+                    element={
+                        <CreatePalette
+                            savePalette={savePalette}
+                            getNames={getPaletteNames}
+                        />
+                    }
                 />
                 <Route
                     path={'palette/:id'}
