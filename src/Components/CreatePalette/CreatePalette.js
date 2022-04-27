@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ChromePicker } from 'react-color';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 //MUI
 import { styled } from '@mui/material/styles';
@@ -71,7 +72,11 @@ export default function CreatePalette() {
     const [open, setOpen] = React.useState(true);
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = React.useState('blue');
-    const [allColors, setAllColors] = React.useState(['red', 'purple']);
+    const [newColorName, setNewColorName] = React.useState('');
+    const [allColors, setAllColors] = React.useState([
+        { name: 'red', color: 'red' },
+        { name: 'purple', color: 'purple' },
+    ]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -89,9 +94,40 @@ export default function CreatePalette() {
         setCurrentColor(newCurrentColor.hex);
     };
 
-    const addColor = () => {
-        setAllColors((prevColors) => [...prevColors, currentColor]);
+    const handleColorNameChange = (e) => {
+        setNewColorName(e.target.value);
     };
+
+    const addColor = (e) => {
+        const newColorEntry = { name: newColorName, color: currentColor };
+        setAllColors((prevColors) => [...prevColors, newColorEntry]);
+    };
+
+    React.useEffect(() => {
+        if (!ValidatorForm.hasValidationRule('isColorNameUnique')) {
+            ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
+                return allColors.every(
+                    ({ name }) =>
+                        name.toLocaleLowerCase() !== value.toLocaleLowerCase(),
+                );
+            });
+        }
+
+        if (!ValidatorForm.hasValidationRule('isColorUnique')) {
+            ValidatorForm.addValidationRule('isColorUnique', (_value) => {
+                return allColors.every(({ color }) => color !== currentColor);
+            });
+        }
+
+        return function cleanCustomRules() {
+            if (ValidatorForm.hasValidationRule('isColorNameUnique')) {
+                ValidatorForm.removeValidationRule('isColorNameUnique');
+            }
+            if (ValidatorForm.hasValidationRule('isColorUnique')) {
+                ValidatorForm.removeValidationRule('isColorUnique');
+            }
+        };
+    });
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -141,19 +177,40 @@ export default function CreatePalette() {
                     onChange={handleColorChange}
                     onChangeComplete={handleColorChangeComplete}
                 />
-                <Button
-                    variant='contained'
-                    style={{ backgroundColor: currentColor }}
-                    onClick={addColor}
-                >
-                    Add Color
-                </Button>
+                <ValidatorForm onSubmit={addColor}>
+                    <TextValidator
+                        name='newColorName'
+                        value={newColorName}
+                        onChange={handleColorNameChange}
+                        validators={[
+                            'required',
+                            'isColorNameUnique',
+                            'isColorUnique',
+                        ]}
+                        errorMessages={[
+                            'this field is required',
+                            'Color name must be unique',
+                            'This color is already used',
+                        ]}
+                    />
+                    <Button
+                        type='submit'
+                        variant='contained'
+                        style={{ backgroundColor: currentColor }}
+                    >
+                        Add Color
+                    </Button>
+                </ValidatorForm>
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
                 <div className='CreatePalette__colors'>
                     {allColors.map((color) => (
-                        <DraggableColorBox color={color} key={color} />
+                        <DraggableColorBox
+                            color={color.color}
+                            name={color.name}
+                            key={color.name}
+                        />
                     ))}
                 </div>
             </Main>
