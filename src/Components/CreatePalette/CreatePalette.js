@@ -3,14 +3,13 @@ import { arrayMove } from 'react-sortable-hoc';
 import { useNavigate } from 'react-router-dom';
 
 //MUI
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
+import { DrawerHeader, Main, drawerWidth } from '../../Helpers/MuiDrawerStyles';
 
 //Own
 import DndColorBoxList from '../DndColorBoxList/DndColorBoxList';
@@ -18,54 +17,6 @@ import CreatePaletteNav from '../CreatePaletteNav/CreatePaletteNav';
 
 import './CreatePalette.css';
 import ColorPickerForm from '../ColorPickerForm/ColorPickerForm';
-
-const drawerWidth = 400;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        height: 'calc(100vh - 64px)',
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}px`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
-    }),
-);
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-}));
 
 export default function CreatePalette({
     savePalette,
@@ -135,7 +86,6 @@ export default function CreatePalette({
     return (
         <Box sx={{ display: 'flex' }}>
             <CreatePaletteNav
-                AppBar={AppBar}
                 open={open}
                 handleDrawerOpen={handleDrawerOpen}
                 handleBack={handleBack}

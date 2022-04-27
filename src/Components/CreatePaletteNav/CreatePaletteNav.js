@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
+import { AppBar } from '../../Helpers/MuiDrawerStyles';
 
 function CreatePaletteNav({
-    AppBar,
     open,
     handleDrawerOpen,
     handleBack,
