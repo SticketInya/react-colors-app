@@ -1,0 +1,8 @@
+.DraggableColorBox{
+    width: 20%;
+    height: 25%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}

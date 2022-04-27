@@ -15,11 +15,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 
+//Own
+import DraggableColorBox from '../DraggableColorBox/DraggableColorBox';
+import './CreatePalette.css';
+
 const drawerWidth = 400;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
+        height: 'calc(100vh - 64px)',
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
@@ -146,22 +151,10 @@ export default function CreatePalette() {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <div>
-                    <ul className='CreatePalette__colors'>
-                        {allColors.map((color) => {
-                            return (
-                                <li
-                                    key={color}
-                                    style={{
-                                        color: 'white',
-                                        backgroundColor: color,
-                                    }}
-                                >
-                                    {color}
-                                </li>
-                            );
-                        })}
-                    </ul>
+                <div className='CreatePalette__colors'>
+                    {allColors.map((color) => (
+                        <DraggableColorBox color={color} key={color} />
+                    ))}
                 </div>
             </Main>
         </Box>
