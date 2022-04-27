@@ -126,6 +126,12 @@ export default function CreatePalette({ savePalette, getNames }) {
         setAllColors((prevColors) => [...prevColors, newColorEntry]);
     };
 
+    const deleteColor = (name) => {
+        setAllColors((prevColors) =>
+            prevColors.filter((color) => color.name !== name),
+        );
+    };
+
     React.useEffect(() => {
         if (!ValidatorForm.hasValidationRule('isColorNameUnique')) {
             ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
@@ -181,7 +187,10 @@ export default function CreatePalette({ savePalette, getNames }) {
                     <Typography variant='h6' noWrap component='div'>
                         Persistent drawer
                     </Typography>
-                    <ValidatorForm onSubmit={handlePaletteSave}>
+                    <ValidatorForm
+                        onSubmit={handlePaletteSave}
+                        className='save-form'
+                    >
                         <TextValidator
                             name='newPaletteName'
                             value={newPaletteName}
@@ -268,6 +277,7 @@ export default function CreatePalette({ savePalette, getNames }) {
                             color={color.color}
                             name={color.name}
                             key={color.name}
+                            deleteColor={deleteColor}
                         />
                     ))}
                 </div>

@@ -9,3 +9,9 @@
     flex-wrap: wrap;
 }
 
+.save-form{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
