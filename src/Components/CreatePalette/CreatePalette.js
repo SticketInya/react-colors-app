@@ -18,7 +18,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Button } from '@mui/material';
 
 //Own
-import DraggableColorBox from '../DraggableColorBox/DraggableColorBox';
 import './CreatePalette.css';
 import { useNavigate } from 'react-router-dom';
 import DndColorBoxList from '../DndColorBoxList/DndColorBoxList';
@@ -71,17 +70,21 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function CreatePalette({ savePalette, getNames }) {
+export default function CreatePalette({
+    savePalette,
+    getNames,
+    defaultColors,
+    getRandomColor,
+    maxColors = 20,
+}) {
     const [open, setOpen] = React.useState(true);
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = React.useState('blue');
     const [newColorName, setNewColorName] = React.useState('');
     const [newPaletteName, setNewPaletteName] = React.useState('');
-    const [allColors, setAllColors] = React.useState([
-        { name: 'red', color: 'red' },
-        { name: 'purple', color: 'purple' },
-    ]);
+    const [allColors, setAllColors] = React.useState(defaultColors);
     const usedPaletteNames = getNames();
+    const isPaletteFull = allColors.length >= maxColors;
 
     const navigate = useNavigate();
 
@@ -109,6 +112,16 @@ export default function CreatePalette({ savePalette, getNames }) {
         setNewPaletteName(e.target.value);
     };
 
+    const handleGetRandomColor = () => {
+        let randomColor = getRandomColor();
+        //TODO - Fix Duplicate Colors
+        // while (!allColors.filter((color) => color.name !== randomColor.name)) {
+        //     randomColor = getRandomColor();
+        //     console.log(randomColor);
+        // }
+        setAllColors((prevColors) => [...prevColors, randomColor]);
+    };
+
     const handlePaletteSave = () => {
         const newPalette = {
             paletteName: newPaletteName,
@@ -126,12 +139,17 @@ export default function CreatePalette({ savePalette, getNames }) {
     const addColor = (e) => {
         const newColorEntry = { name: newColorName, color: currentColor };
         setAllColors((prevColors) => [...prevColors, newColorEntry]);
+        setNewColorName('');
     };
 
     const deleteColor = (name) => {
         setAllColors((prevColors) =>
             prevColors.filter((color) => color.name !== name),
         );
+    };
+
+    const clearPalette = () => {
+        setAllColors([]);
     };
 
     const handleSortEnd = ({ oldIndex, newIndex }) => {
@@ -242,8 +260,16 @@ export default function CreatePalette({ savePalette, getNames }) {
                 <Divider />
                 <h3>Create Your Palette</h3>
                 <div className='btn-container'>
-                    <Button variant='contained'>Contained</Button>
-                    <Button variant='outlined'>Outlined</Button>
+                    <Button variant='contained' onClick={clearPalette}>
+                        Clear Palette
+                    </Button>
+                    <Button
+                        variant='outlined'
+                        onClick={handleGetRandomColor}
+                        disabled={isPaletteFull}
+                    >
+                        Random Color
+                    </Button>
                 </div>
                 <ChromePicker
                     color={color}
@@ -269,9 +295,14 @@ export default function CreatePalette({ savePalette, getNames }) {
                     <Button
                         type='submit'
                         variant='contained'
-                        style={{ backgroundColor: currentColor }}
+                        style={{
+                            backgroundColor: isPaletteFull
+                                ? 'grey'
+                                : currentColor,
+                        }}
+                        disabled={isPaletteFull}
                     >
-                        Add Color
+                        {isPaletteFull ? 'Palette Full' : 'Add Color'}
                     </Button>
                 </ValidatorForm>
             </Drawer>

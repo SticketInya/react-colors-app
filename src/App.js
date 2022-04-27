@@ -20,6 +20,14 @@ function App() {
         return allPalettes.map((palette) => palette.paletteName);
     };
 
+    const getRandomColor = () => {
+        const randPaletteIndex = Math.floor(Math.random() * allPalettes.length);
+        const randColorIndex = Math.floor(
+            Math.random() * allPalettes[randPaletteIndex].colors.length,
+        );
+        return allPalettes[randPaletteIndex].colors[randColorIndex];
+    };
+
     return (
         <div className='App'>
             <Routes>
@@ -33,6 +41,8 @@ function App() {
                         <CreatePalette
                             savePalette={savePalette}
                             getNames={getPaletteNames}
+                            defaultColors={allPalettes[0].colors}
+                            getRandomColor={getRandomColor}
                         />
                     }
                 />
