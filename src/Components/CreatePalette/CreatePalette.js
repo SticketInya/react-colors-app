@@ -65,7 +65,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function CreatePalette() {
     const [open, setOpen] = React.useState(true);
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
-    const [currentColor, setCurrentColor] = React.useState('red');
+    const [currentColor, setCurrentColor] = React.useState('blue');
+    const [allColors, setAllColors] = React.useState(['red', 'purple']);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -81,6 +82,10 @@ export default function CreatePalette() {
 
     const handleColorChangeComplete = (newCurrentColor) => {
         setCurrentColor(newCurrentColor.hex);
+    };
+
+    const addColor = () => {
+        setAllColors((prevColors) => [...prevColors, currentColor]);
     };
 
     return (
@@ -134,12 +139,30 @@ export default function CreatePalette() {
                 <Button
                     variant='contained'
                     style={{ backgroundColor: currentColor }}
+                    onClick={addColor}
                 >
                     Add Color
                 </Button>
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
+                <div>
+                    <ul className='CreatePalette__colors'>
+                        {allColors.map((color) => {
+                            return (
+                                <li
+                                    key={color}
+                                    style={{
+                                        color: 'white',
+                                        backgroundColor: color,
+                                    }}
+                                >
+                                    {color}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </Main>
         </Box>
     );
