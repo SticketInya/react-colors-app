@@ -19,6 +19,7 @@ import { Button } from '@mui/material';
 //Own
 import DraggableColorBox from '../DraggableColorBox/DraggableColorBox';
 import './CreatePalette.css';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 400;
 
@@ -68,7 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function CreatePalette() {
+export default function CreatePalette({ savePalette }) {
     const [open, setOpen] = React.useState(true);
     const [color, setColor] = React.useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = React.useState('blue');
@@ -77,6 +78,8 @@ export default function CreatePalette() {
         { name: 'red', color: 'red' },
         { name: 'purple', color: 'purple' },
     ]);
+
+    const navigate = useNavigate();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -96,6 +99,21 @@ export default function CreatePalette() {
 
     const handleColorNameChange = (e) => {
         setNewColorName(e.target.value);
+    };
+
+    const handlePaletteSave = () => {
+        const pName = 'Test Color Palette';
+        const newPalette = {
+            paletteName: pName,
+            id: pName.toLowerCase().replace(/ /g, '-'),
+            emoji: ':)',
+            colors: allColors,
+        };
+        savePalette(newPalette);
+    };
+
+    const handleBack = () => {
+        navigate('../');
     };
 
     const addColor = (e) => {
@@ -146,6 +164,16 @@ export default function CreatePalette() {
                     <Typography variant='h6' noWrap component='div'>
                         Persistent drawer
                     </Typography>
+                    <Button variant='contained' onClick={handlePaletteSave}>
+                        Save
+                    </Button>
+                    <Button
+                        variant='outlined'
+                        onClick={handleBack}
+                        style={{ backgroundColor: 'white' }}
+                    >
+                        Back
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer

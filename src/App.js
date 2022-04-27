@@ -7,20 +7,30 @@ import PaletteList from './Components/PaletteList/PaletteList';
 import ColorPalette from './Components/ColorPalette/ColorPalette';
 import SingleColorPalette from './Components/SingleColorPalette/SingleColorPalette';
 import CreatePalette from './Components/CreatePalette/CreatePalette';
+import { useState } from 'react';
 
 function App() {
+    const [allPalettes, setAllPalettes] = useState(DefaultColors);
+
+    const savePalette = (newPalette) => {
+        setAllPalettes((prevState) => [...prevState, newPalette]);
+    };
+
     return (
         <div className='App'>
             <Routes>
                 <Route
                     path={'/'}
-                    element={<PaletteList palettes={DefaultColors} />}
+                    element={<PaletteList palettes={allPalettes} />}
                 />
-                <Route path={'palette/new'} element={<CreatePalette />} />
+                <Route
+                    path={'palette/new'}
+                    element={<CreatePalette savePalette={savePalette} />}
+                />
                 <Route
                     path={'palette/:id'}
                     element={
-                        <FindPalette colorPalettes={DefaultColors}>
+                        <FindPalette colorPalettes={allPalettes}>
                             <ColorPalette />
                         </FindPalette>
                     }
@@ -28,7 +38,7 @@ function App() {
                 <Route
                     path={'palette/:id/:colorId'}
                     element={
-                        <FindPalette colorPalettes={DefaultColors}>
+                        <FindPalette colorPalettes={allPalettes}>
                             <SingleColorPalette />
                         </FindPalette>
                     }
