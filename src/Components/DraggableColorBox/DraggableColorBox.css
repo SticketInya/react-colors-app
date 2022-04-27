@@ -4,5 +4,30 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
-    margin: 0;
+    padding: 0.5rem;
+}
+
+.DraggableColorBox__content{
+    bottom:1rem;
+    position: absolute;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.color-name{
+    text-transform: uppercase;
+}
+
+.DraggableColorBox .delete-icon{
+    transition: all 200ms ease-in-out;
+}
+
+.DraggableColorBox:hover .delete-icon{
+    color:white;
+    transform: scale(1.5);
 }
