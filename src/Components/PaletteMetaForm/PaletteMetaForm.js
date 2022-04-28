@@ -19,6 +19,7 @@ export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
 
     const handlePaletteSave = () => {
         paletteSave(newPaletteName);
+        handleClose();
     };
 
     const handleClickOpen = () => {
@@ -53,15 +54,12 @@ export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Subscribe</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Name your beautiful and super-duper unique color
-                        palette!
-                    </DialogContentText>
-                    <ValidatorForm
-                        onSubmit={handlePaletteSave}
-                        className='CreatePaletteNav__form'
-                    >
+                <ValidatorForm onSubmit={handlePaletteSave}>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please name your beautiful Palette! Make sure to use
+                            a just as unique name as it is!
+                        </DialogContentText>
                         <TextValidator
                             name='newPaletteName'
                             value={newPaletteName}
@@ -72,17 +70,18 @@ export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
                                 'Palette name must be unique',
                             ]}
                             variant='filled'
+                            fullWidth
+                            margin='normal'
                             label='Palette Name'
                         />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
                         <Button variant='contained' type='submit'>
                             Save
                         </Button>
-                    </ValidatorForm>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
-                </DialogActions>
+                    </DialogActions>
+                </ValidatorForm>
             </Dialog>
         </div>
     );
