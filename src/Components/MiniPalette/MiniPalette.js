@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 //Mui
 import DeleteIcon from '@mui/icons-material/Delete';
-import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
+import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,10 +11,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
-import { blue } from '@mui/material/colors';
+import { blue, red } from '@mui/material/colors';
 
 import './MiniPalette.scss';
 
@@ -76,10 +72,30 @@ export default function MiniPalette({
                 </DialogTitle>
                 <List sx={{ pt: 0 }}>
                     <ListItem button onClick={handleDelete} key={'bnt-delete'}>
+                        <ListItemAvatar>
+                            <Avatar
+                                style={{
+                                    backgroundColor: red[100],
+                                    color: red[600],
+                                }}
+                            >
+                                <DeleteIcon />
+                            </Avatar>
+                        </ListItemAvatar>
                         <ListItemText primary='Delete' />
                     </ListItem>
 
                     <ListItem button onClick={handleClose} key={'btn-cancel'}>
+                        <ListItemAvatar>
+                            <Avatar
+                                style={{
+                                    backgroundColor: blue[100],
+                                    color: blue[600],
+                                }}
+                            >
+                                <CloseIcon />
+                            </Avatar>
+                        </ListItemAvatar>
                         <ListItemText primary='Cancel' />
                     </ListItem>
                 </List>
