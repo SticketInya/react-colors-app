@@ -4,7 +4,7 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    background-color: darkslategray;
+    background-color: darkslategray !important;
     padding: 0 1rem;
 }
 
