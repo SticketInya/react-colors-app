@@ -3,7 +3,7 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button } from '@mui/material';
 
-import './ColorPickerForm.css';
+import './ColorPickerForm.scss';
 
 function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
     const [color, setColor] = useState('rgba(0,0,0,1)');

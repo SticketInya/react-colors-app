@@ -14,9 +14,9 @@ import { DrawerHeader, Main, drawerWidth } from '../../Helpers/MuiDrawerStyles';
 //Own
 import DndColorBoxList from '../DndColorBoxList/DndColorBoxList';
 import CreatePaletteNav from '../CreatePaletteNav/CreatePaletteNav';
-
-import './CreatePalette.css';
 import ColorPickerForm from '../ColorPickerForm/ColorPickerForm';
+
+import './CreatePalette.scss';
 
 export default function CreatePalette({
     savePalette,

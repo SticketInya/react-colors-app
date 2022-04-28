@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+
+//Mui
 import { MenuItem, Select, Snackbar } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+
+import './Navbar.scss';
 
 class Navbar extends Component {
     static defaultProps = {

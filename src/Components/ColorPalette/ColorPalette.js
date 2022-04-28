@@ -3,7 +3,7 @@ import ColorBox from '../ColorBox/ColorBox';
 import Navbar from '../Navbar/Navbar';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
 
-import './ColorPalette.css';
+import './ColorPalette.scss';
 
 class ColorPalette extends Component {
     constructor(props) {
@@ -36,7 +36,9 @@ class ColorPalette extends Component {
                     changeFormat={this.handleFormatChange}
                     showSlider={true}
                 />
-                <div className='ColorPalette__colors'>{colorBoxes}</div>
+                <div className='ColorPalette__colors ColorPaletteGrid__responsive'>
+                    {colorBoxes}
+                </div>
                 <PaletteFooter paletteName={paletteName} emoji={emoji} />
             </div>
         );

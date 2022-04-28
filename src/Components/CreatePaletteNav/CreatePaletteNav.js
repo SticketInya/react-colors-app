@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import { AppBar } from '../../Helpers/MuiDrawerStyles';
 
-import './CreatePaletteNav.css';
+import './CreatePaletteNav.scss';
 import PaletteMetaForm from '../PaletteMetaForm/PaletteMetaForm';
 
 function CreatePaletteNav({

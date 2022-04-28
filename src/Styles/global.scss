@@ -1,0 +1,36 @@
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+.ColorPaletteGrid__responsive{
+    display: grid;
+    grid-template-rows: repeat(20, 1fr);
+    @media(min-width:$sm){
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        }
+    @media(min-width:$lg){
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        }
+    @media(min-width:$xl){
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        }
+}
+
+.SingleColorPaletteGrid__responsive{
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    @media(min-width:$sm){
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        }
+    @media(min-width:$lg){
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        }
+
+}

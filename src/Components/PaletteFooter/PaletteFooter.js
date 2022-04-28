@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './PaletteFooter.css';
+import './PaletteFooter.scss';
 
 class PaletteFooter extends Component {
     render() {

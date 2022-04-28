@@ -17,7 +17,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 
-import './MiniPalette.css';
+import './MiniPalette.scss';
 
 export default function MiniPalette({
     paletteName,

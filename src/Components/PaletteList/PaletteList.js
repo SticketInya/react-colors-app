@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MiniPalette from '../MiniPalette/MiniPalette';
 import { Link } from 'react-router-dom';
 
-import './PaletteList.css';
+import './PaletteList.scss';
 
 class PaletteList extends Component {
     constructor(props) {

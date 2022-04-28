@@ -5,7 +5,7 @@ import Navbar from '../Navbar/Navbar';
 import PaletteFooter from '../PaletteFooter/PaletteFooter';
 import { Link } from 'react-router-dom';
 
-import './SingleColorPalette.css';
+import './SingleColorPalette.scss';
 
 function SingleColorPalette({
     palette: { colors, paletteName, emoji, id: paletteId },
@@ -40,7 +40,7 @@ function SingleColorPalette({
     return (
         <div className='SingleColorPalette'>
             <Navbar changeFormat={handleFormatChange} />
-            <div className='SingleColorPalette__colors'>
+            <div className='SingleColorPalette__colors SingleColorPaletteGrid__responsive'>
                 {colorBoxes}
                 <div style={{ backgroundColor: 'black', position: 'relative' }}>
                     <Link

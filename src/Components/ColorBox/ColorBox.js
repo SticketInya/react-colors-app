@@ -3,7 +3,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 import chroma from 'chroma-js';
 
-import './ColorBox.css';
+import './ColorBox.scss';
 
 const WCAG_CONTRAST_RATIO = 4.5;
 
