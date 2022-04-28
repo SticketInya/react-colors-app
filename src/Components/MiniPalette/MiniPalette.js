@@ -14,7 +14,7 @@ class MiniPalette extends Component {
         const colorBoxes = colors.map((color) => {
             return (
                 <div
-                    key={color.name}
+                    key={id + color.name}
                     className='miniColor'
                     style={{ backgroundColor: color.color }}
                 />
