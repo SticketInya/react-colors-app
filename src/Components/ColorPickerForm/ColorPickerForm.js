@@ -65,6 +65,7 @@ function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
             <ValidatorForm
                 onSubmit={handleSubmit}
                 className='ColorPickerForm__form'
+                instantValidate={false}
             >
                 <TextValidator
                     className='ColorPickerForm__input'

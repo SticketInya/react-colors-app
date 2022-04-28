@@ -11,7 +11,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { blue, red } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 
 import './MiniPalette.scss';
 
@@ -89,8 +89,8 @@ export default function MiniPalette({
                         <ListItemAvatar>
                             <Avatar
                                 style={{
-                                    backgroundColor: blue[100],
-                                    color: blue[600],
+                                    backgroundColor: grey[300],
+                                    color: grey[700],
                                 }}
                             >
                                 <CloseIcon />
