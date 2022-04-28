@@ -53,7 +53,7 @@ export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
                 Save Palette
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>Name Your Palette</DialogTitle>
                 <ValidatorForm onSubmit={handlePaletteSave}>
                     <DialogContent>
                         <DialogContentText>
