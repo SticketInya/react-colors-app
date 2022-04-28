@@ -42,12 +42,14 @@ export default function CreatePalette({
     };
 
     const handleGetRandomColor = () => {
-        let randomColor = getRandomColor();
-        //TODO - Fix Duplicate Colors
-        // while (!allColors.filter((color) => color.name !== randomColor.name)) {
-        //     randomColor = getRandomColor();
-        //     console.log(randomColor);
-        // }
+        let randomColor;
+        let isDuplicate = true;
+        do {
+            randomColor = getRandomColor();
+            isDuplicate = allColors.some((color) => {
+                return color.name === randomColor.name;
+            });
+        } while (isDuplicate);
         setAllColors((prevColors) => [...prevColors, randomColor]);
     };
 
