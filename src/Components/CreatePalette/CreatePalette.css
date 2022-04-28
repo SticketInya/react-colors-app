@@ -2,9 +2,22 @@
 
 }
 
-.save-form{
+.Drawer__content{
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    margin-left: 2rem;
-    margin-right: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.Drawer__title{
+    font-size: 2rem;
+}
+
+.Btn-container{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
 }

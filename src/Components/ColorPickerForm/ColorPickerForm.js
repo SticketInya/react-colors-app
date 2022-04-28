@@ -3,6 +3,8 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Button } from '@mui/material';
 
+import './ColorPickerForm.css';
+
 function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
     const [color, setColor] = useState('rgba(0,0,0,1)');
     const [currentColor, setCurrentColor] = useState('blue');
@@ -53,15 +55,22 @@ function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
     });
 
     return (
-        <>
+        <div className='ColorPickerForm'>
             <ChromePicker
+                className='ColorPickerForm__colorpicker'
                 color={color}
                 onChange={handleColorChange}
                 onChangeComplete={handleColorChangeComplete}
             />
-            <ValidatorForm onSubmit={handleSubmit}>
+            <ValidatorForm
+                onSubmit={handleSubmit}
+                className='ColorPickerForm__form'
+            >
                 <TextValidator
+                    className='ColorPickerForm__input'
                     name='newColorName'
+                    variant='filled'
+                    label='Color Name'
                     value={newColorName}
                     onChange={handleColorNameChange}
                     validators={[
@@ -76,6 +85,7 @@ function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
                     ]}
                 />
                 <Button
+                    className='ColorPickerForm__submit'
                     type='submit'
                     variant='contained'
                     style={{
@@ -86,7 +96,7 @@ function ColorPickerForm({ isPaletteFull, allColors, addColor }) {
                     {isPaletteFull ? 'Palette Full' : 'Add Color'}
                 </Button>
             </ValidatorForm>
-        </>
+        </div>
     );
 }
 

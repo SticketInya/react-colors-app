@@ -110,25 +110,26 @@ export default function CreatePalette({
                         <ChevronLeftIcon />
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
-                <h3>Create Your Palette</h3>
-                <div className='btn-container'>
-                    <Button variant='contained' onClick={clearPalette}>
-                        Clear Palette
-                    </Button>
-                    <Button
-                        variant='outlined'
-                        onClick={handleGetRandomColor}
-                        disabled={isPaletteFull}
-                    >
-                        Random Color
-                    </Button>
+                <div className='Drawer__content'>
+                    <h2 className='Drawer__title'>Add your own colors!</h2>
+                    <div className='Btn-container'>
+                        <Button variant='contained' onClick={clearPalette}>
+                            Clear Palette
+                        </Button>
+                        <Button
+                            variant='outlined'
+                            onClick={handleGetRandomColor}
+                            disabled={isPaletteFull}
+                        >
+                            Random Color
+                        </Button>
+                    </div>
+                    <ColorPickerForm
+                        isPaletteFull={isPaletteFull}
+                        allColors={allColors}
+                        addColor={addColor}
+                    />
                 </div>
-                <ColorPickerForm
-                    isPaletteFull={isPaletteFull}
-                    allColors={allColors}
-                    addColor={addColor}
-                />
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />

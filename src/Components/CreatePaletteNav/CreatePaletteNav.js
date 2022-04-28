@@ -8,6 +8,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material';
 import { AppBar } from '../../Helpers/MuiDrawerStyles';
 
+import './CreatePaletteNav.css';
+
 function CreatePaletteNav({
     open,
     handleDrawerOpen,
@@ -45,7 +47,7 @@ function CreatePaletteNav({
     return (
         <>
             <CssBaseline />
-            <AppBar position='fixed' open={open}>
+            <AppBar className='CreatePaletteNav' position='fixed' open={open}>
                 <Toolbar>
                     <IconButton
                         color='inherit'
@@ -57,11 +59,13 @@ function CreatePaletteNav({
                         <MenuIcon />
                     </IconButton>
                     <Typography variant='h6' noWrap component='div'>
-                        Persistent drawer
+                        Create your Palette
                     </Typography>
+                </Toolbar>
+                <div className='Btn__container'>
                     <ValidatorForm
                         onSubmit={handlePaletteSave}
-                        className='save-form'
+                        className='CreatePaletteNav__form'
                     >
                         <TextValidator
                             name='newPaletteName'
@@ -85,7 +89,7 @@ function CreatePaletteNav({
                     >
                         Back
                     </Button>
-                </Toolbar>
+                </div>
             </AppBar>
         </>
     );
