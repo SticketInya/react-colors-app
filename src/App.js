@@ -7,10 +7,10 @@ import PaletteList from './Components/PaletteList/PaletteList';
 import ColorPalette from './Components/ColorPalette/ColorPalette';
 import SingleColorPalette from './Components/SingleColorPalette/SingleColorPalette';
 import CreatePalette from './Components/CreatePalette/CreatePalette';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-    const [allPalettes, setAllPalettes] = useState(DefaultColors);
+    const [allPalettes, setAllPalettes] = useState(() => getInitalPalettes());
 
     const savePalette = (newPalette) => {
         setAllPalettes((prevState) => [...prevState, newPalette]);
@@ -20,6 +20,10 @@ function App() {
         return allPalettes.map((palette) => palette.paletteName);
     };
 
+    function getInitalPalettes() {
+        return JSON.parse(localStorage.getItem('palettes')) || DefaultColors;
+    }
+
     const getRandomColor = () => {
         const randPaletteIndex = Math.floor(Math.random() * allPalettes.length);
         const randColorIndex = Math.floor(
@@ -27,6 +31,10 @@ function App() {
         );
         return allPalettes[randPaletteIndex].colors[randColorIndex];
     };
+
+    useEffect(() => {
+        localStorage.setItem('palettes', JSON.stringify(allPalettes));
+    }, [allPalettes]);
 
     return (
         <div className='App'>
