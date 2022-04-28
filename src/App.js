@@ -60,7 +60,7 @@ function App() {
                         <CreatePalette
                             savePalette={savePalette}
                             getNames={getPaletteNames}
-                            defaultColors={allPalettes[0].colors}
+                            defaultColors={DefaultColors[0].colors}
                             getRandomColor={getRandomColor}
                         />
                     }
