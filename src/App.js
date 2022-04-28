@@ -12,17 +12,23 @@ import { useEffect, useState } from 'react';
 function App() {
     const [allPalettes, setAllPalettes] = useState(() => getInitalPalettes());
 
+    function getInitalPalettes() {
+        return JSON.parse(localStorage.getItem('palettes')) || DefaultColors;
+    }
+
     const savePalette = (newPalette) => {
         setAllPalettes((prevState) => [...prevState, newPalette]);
+    };
+
+    const deletePalette = (paletteId) => {
+        setAllPalettes((prevPalettes) => {
+            return prevPalettes.filter((palette) => palette.id !== paletteId);
+        });
     };
 
     const getPaletteNames = () => {
         return allPalettes.map((palette) => palette.paletteName);
     };
-
-    function getInitalPalettes() {
-        return JSON.parse(localStorage.getItem('palettes')) || DefaultColors;
-    }
 
     const getRandomColor = () => {
         const randPaletteIndex = Math.floor(Math.random() * allPalettes.length);
@@ -41,7 +47,12 @@ function App() {
             <Routes>
                 <Route
                     path={'/'}
-                    element={<PaletteList palettes={allPalettes} />}
+                    element={
+                        <PaletteList
+                            palettes={allPalettes}
+                            deletePalette={deletePalette}
+                        />
+                    }
                 />
                 <Route
                     path={'palette/new'}
