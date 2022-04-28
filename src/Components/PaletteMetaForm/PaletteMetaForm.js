@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 //Mui
 import Button from '@mui/material/Button';
@@ -11,23 +14,31 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
     const [newPaletteName, setNewPaletteName] = useState('');
-    const [open, setOpen] = useState(false);
+    const [formOpen, setFormOpen] = useState(false);
+    const [pickerOpen, setPickerOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const handlePaletteNameChange = (e) => {
         setNewPaletteName(e.target.value);
     };
 
-    const handlePaletteSave = () => {
-        paletteSave(newPaletteName);
+    const handlePaletteSave = (emoji) => {
+        paletteSave(newPaletteName, emoji.native);
+        navigate('../');
+    };
+
+    const handleSubmit = () => {
+        setPickerOpen(true);
         handleClose();
     };
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setFormOpen(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setFormOpen(false);
     };
 
     useEffect(() => {
@@ -52,9 +63,13 @@ export default function PaletteMetaForm({ usedPaletteNames, paletteSave }) {
             <Button variant='contained' onClick={handleClickOpen}>
                 Save Palette
             </Button>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={pickerOpen}>
+                <DialogTitle>Choose a Palette emoji</DialogTitle>
+                <Picker onSelect={handlePaletteSave} />
+            </Dialog>
+            <Dialog open={formOpen} onClose={handleClose}>
                 <DialogTitle>Name Your Palette</DialogTitle>
-                <ValidatorForm onSubmit={handlePaletteSave}>
+                <ValidatorForm onSubmit={handleSubmit}>
                     <DialogContent>
                         <DialogContentText>
                             Please name your beautiful Palette! Make sure to use

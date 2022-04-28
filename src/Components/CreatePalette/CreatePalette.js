@@ -51,11 +51,11 @@ export default function CreatePalette({
         setAllColors((prevColors) => [...prevColors, randomColor]);
     };
 
-    const handlePaletteSave = (newPaletteName) => {
+    const handlePaletteSave = (newPaletteName, emoji) => {
         const newPalette = {
             paletteName: newPaletteName,
             id: newPaletteName.toLowerCase().replace(/ /g, '-'),
-            emoji: ':)',
+            emoji: emoji,
             colors: allColors,
         };
         savePalette(newPalette);
